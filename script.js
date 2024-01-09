@@ -3,7 +3,8 @@ function getComputerChoice() {
   let choice = options[Math.floor(Math.random() * 3)];
   return choice;
 }
-// console.log(getComputerChoice());
+
+/* let option = prompt("What's your choice?"); */
 
 function playRound(playerSelection, computerSelection) {
   let result = "";
@@ -37,28 +38,41 @@ function playRound(playerSelection, computerSelection) {
   return result;
 }
 
-let playerSelection = "scissors";
+let playerSelection = "rock";
 let computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+/* console.log(playRound(playerSelection, computerSelection)); */
+
+let playerScore = 0;
+let compScore = 0;
+let ties = 0;
 
 function game(playerSelection) {
-  let computerSelection = getComputerChoice();
-  let score = { wins: 0, losses: 0, ties: 0 };
-  let round = playRound(playerSelection, computerSelection);
-  let result = "";
-
-  /* if (score.losses >= 5 || computerSelection >= 5) {
-    return (result = "Game over, you lose");
-  } else if (score.wins >= 5 || computerSelection >= 5) {
-    return (result = "Game over, you win!");
+  for (let i = 0; i < 5; i++) {
+    console.log(playRound(playerSelection, computerSelection));
+    selectWinner();
   }
-
-  if (round === "You win!") {
-    score.wins++;
-  } else if (round === "You Lose!") {
-    score.losses++;
-  } else if (round === "It's a tie") {
-    score.ties++;
-  }
-  console.log(score);*/
 }
+
+function selectWinner() {
+  const computerSelection = getComputerChoice();
+  let round = playRound(playerSelection, computerSelection);
+  if (compScore >= 5) {
+    return (result = "Game over, you lose");
+  } else if (playerScore >= 5) {
+    result = "Game over, you win!";
+  }
+
+  if (round.includes("You win!")) {
+    playerScore++;
+  } else if (round.includes("You Lose!")) {
+    compScore++;
+  } else if (round === "It's a tie") {
+    ties++;
+  }
+
+  console.log(playerScore);
+  console.log(compScore);
+  console.log(ties);
+}
+
+console.log(game(playerSelection));
