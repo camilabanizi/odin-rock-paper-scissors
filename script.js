@@ -1,15 +1,20 @@
+let playerScore = 0;
+let compScore = 0;
+let ties = 0;
+
 function getComputerChoice() {
   let options = ["rock", "paper", "scissors"];
   let choice = options[Math.floor(Math.random() * 3)];
   return choice;
 }
 
-/* let option = prompt("What's your choice?"); */
+let playerSelection = prompt("What's your choice?");
+let computerSelection = getComputerChoice();
 
 function playRound(playerSelection, computerSelection) {
   let result = "";
-  console.log("**Player selection:**", playerSelection);
-  console.log("**Computer selection:**", computerSelection);
+  /* console.log("**Player selection:", playerSelection);
+  console.log("**Computer selection:", computerSelection); */
 
   if (playerSelection === computerSelection) return (result = "It's a tie");
 
@@ -34,45 +39,38 @@ function playRound(playerSelection, computerSelection) {
       result = "You Lose! Rock beats Scissors";
     }
   }
-
   return result;
 }
 
-let playerSelection = "rock";
-let computerSelection = getComputerChoice();
-/* console.log(playRound(playerSelection, computerSelection)); */
-
-let playerScore = 0;
-let compScore = 0;
-let ties = 0;
+function selectWinner() {
+  if (compScore === 5) {
+    return (result = "Game over, you lose");
+  } else if (playerScore === 5) {
+    return (result = "Game over, you win!");
+  }
+}
 
 function game(playerSelection) {
-  for (let i = 0; i < 5; i++) {
-    console.log(playRound(playerSelection, computerSelection));
-    selectWinner();
-  }
-}
-
-function selectWinner() {
   const computerSelection = getComputerChoice();
   let round = playRound(playerSelection, computerSelection);
-  if (compScore >= 5) {
-    return (result = "Game over, you lose");
-  } else if (playerScore >= 5) {
-    result = "Game over, you win!";
-  }
 
-  if (round.includes("You win!")) {
-    playerScore++;
-  } else if (round.includes("You Lose!")) {
-    compScore++;
-  } else if (round === "It's a tie") {
-    ties++;
+  for (let i = 0; i < 5; i++) {
+    console.log(playRound(playerSelection, computerSelection));
+    if (round.includes("You win!")) {
+      playerScore++;
+    } else if (round.includes("You Lose!")) {
+      compScore++;
+    } else if (round === "It's a tie") {
+      ties++;
+    }
+    console.log(playerScore);
+    console.log(compScore);
+    console.log(ties);
   }
-
-  console.log(playerScore);
-  console.log(compScore);
-  console.log(ties);
 }
+game(playerSelection);
 
-console.log(game(playerSelection));
+function resetGame() {
+  playerScore = 0;
+  compScore = 0;
+}
