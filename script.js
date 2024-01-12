@@ -1,4 +1,4 @@
-let rounds = 0;
+/* let rounds = 0; */
 let playerScore = 0;
 let compScore = 0;
 let ties = 0;
@@ -44,12 +44,18 @@ function playRound(playerSelection, computerSelection) {
       compScore++;
     }
   }
-  rounds++;
+  /* rounds++; */
   return result;
 }
 
+function resetGame() {
+  playerScore = 0;
+  compScore = 0;
+  ties = 0;
+}
+
 function game() {
-  while (rounds <= 5) {
+  for (i = 0; i < 5; i++) {
     let playerSelection = prompt("What's your choice?");
     let computerSelection = getComputerChoice();
     console.log(playRound(playerSelection, computerSelection));
@@ -58,19 +64,22 @@ function game() {
     console.log(compScore);
     console.log(ties);
   }
+  /* while (rounds < 3) {
+    let playerSelection = prompt("What's your choice?");
+    let computerSelection = getComputerChoice();
+    console.log(playRound(playerSelection, computerSelection));
+
+    console.log(playerScore);
+    console.log(compScore);
+    console.log(ties);
+  } */
   if (playerScore > compScore) {
     console.log("Game over, you win!");
   } else if (compScore > playerScore) {
     console.log("Game over, you lose");
-  } else if (ties > playerScore || compScore) {
+  } else if (ties >= playerScore || ties >= compScore) {
     console.log("Game over, it's a tie");
   }
 }
 
 game();
-
-/* function resetGame() {
-  playerScore = 0;
-  compScore = 0;
-  ties = 0;
-} */
